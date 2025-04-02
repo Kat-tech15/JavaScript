@@ -71,6 +71,22 @@ exports.getAllUsers = async (req, res) => {
 /**
  * Sanitize user object by removing sensitive information.
  */
+exports.getUserById = async = (req, res) => {
+  try{
+    const userId = req.params.id;
+    // perform user retrieval logic
+    //const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json([error, "user not found"]);
+    }
+    const sanitizeUser = sanitizeUser(user);
+    res.status(200).json(sanitizeUser);
+  }catch (error){
+    console.error("Error getting user", error);
+    return res.status(500).json((error,"Internal Server Error"));
+  }
+}
 function sanitizeUser(user) {
   return {
     id: user.id,
